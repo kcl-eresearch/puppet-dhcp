@@ -53,6 +53,11 @@ subnet <%= @network %> netmask <%= @mask %> {
 <% elsif @nameservers_ipv6 -%>
   option dhcp6.name-servers <%= @nameservers_ipv6 %>;
 <% end -%>
+<% if @ntpservers and @ntpservers.is_a? Array -%>
+  option ntp-servers <%= @ntpservers.join(', ') %>;
+<% elsif @ntpservers -%>
+  option ntp-servers <%= @ntpservers %>;
+<% end -%>
 <% if @pxeserver -%>
   next-server <%= @pxeserver %>;
 <% end -%>
